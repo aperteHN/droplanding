@@ -2,8 +2,6 @@
 
 Design reference for the RWAI airdrop landing page.
 
-**Live preview:** https://rwai-drop-b221b230.vercel.app
-
 > Static design preview. Rebuild in your own stack using this as the visual and behavioral reference. Not for direct production use.
 
 ## Structure
