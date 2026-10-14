@@ -1,1 +1,40 @@
-IyBSV0FJIEFpcmRyb3AgTGFuZGluZyBQYWdlCgpEZXNpZ24gcmVmZXJlbmNlIGZvciB0aGUgUldBSSBhaXJkcm9wIGxhbmRpbmcgcGFnZS4KCioqTGl2ZSBwcmV2aWV3OioqIGh0dHBzOi8vcndhaS1kcm9wLWIyMjFiMjMwLnZlcmNlbC5hcHAKCj4gU3RhdGljIGRlc2lnbiBwcmV2aWV3LiBSZWJ1aWxkIGluIHlvdXIgb3duIHN0YWNrIHVzaW5nIHRoaXMgYXMgdGhlIHZpc3VhbCBhbmQgYmVoYXZpb3JhbCByZWZlcmVuY2UuIE5vdCBmb3IgZGlyZWN0IHByb2R1Y3Rpb24gdXNlLgoKIyMgU3RydWN0dXJlCgotIGBpbmRleC5odG1sYCAtIExhbmRpbmcgcGFnZSAoc2luZ2xlIGZpbGUsIENTUy9KUyBpbmxpbmUpCi0gYGltZypgIC0gSW1hZ2UgYXNzZXRzICh3ZWJwL2pwZy9wbmcvc3ZnKQoKIyMgU2VjdGlvbnMKCjEuIEhlcm8gLSAiQXBwbHkgZGFpbHkuIE93biB3aGF0J3MgbmV4dC4iCjIuIFRva2VuIGludHJvIC0gIk1lZXQgdGhlIHRva2VuIGJlaGluZCB0aGlzIGFpcmRyb3AuIgozLiBDbGllbnRzIC0gTG9nbyBncmlkCjQuIEludmVzdG9ycyAtIExvZ28gbWFycXVlZQo1LiBIb3cgaXQgd29ya3MgLSA1IHN0ZXBzCjYuIFEmQQo3LiBFbnRyeSBDVEEgLSAiUmVhZHkgZm9yIHlvdXIgbmV4dCBhaXJkcm9wIGVudHJ5PyIKCiMjIEVudHJ5IEZsb3cgKGRlbW8pCgoxLiAqKkJ1eSBOb3cqKiAtIEdvZXMgdG8gbG9naW4gc2NyZWVuIChsb2dpbiByZXF1aXJlZCkKMi4gQWZ0ZXIgbG9naW4gLSAqKlJldmlldyBlbnRyeSB0cmFuc2FjdGlvbioqIG1vZGFsIG9wZW5zCjMuIFNlbGVjdCAqKkJhc2UqKiBvciAqKkJTQyoqCjQuICoqQ29uZmlybSBpbiB3YWxsZXQqKiAtIE1vZGFsIGNsb3NlcywgQ1RBIHNob3dzICJBbHJlYWR5IGFwcGxpZWQgdG9kYXkuIgoKTm8gcmVhbCB3YWxsZXQgb3Igb24tY2hhaW4gdHJhbnNhY3Rpb24uIERlbW8gb25seS4KCiMjIFNwZWNzCgotIERhaWx5IGxpbWl0OiAiT25lIGVudHJ5IHBlciBkYXkgcGVyIGFjY291bnQiCi0gR2FzOiBCYXNlIGAwLjAwMDIgRVRIYCAvIEJTQyBgMC4wMDA2IEJOQmAKLSBObyBlbnRyeSBwcmljZSwgZ2FzIG9ubHkKLSBGb250OiBJbnRlcgotIExpZ2h0IG1vZGUgb25seQotIE1vYmlsZSAzOTBweCB2ZXJpZmllZAo=
+# RWAI Airdrop Landing Page
+
+Design reference for the RWAI airdrop landing page.
+
+**Live preview:** https://rwai-drop-b221b230.vercel.app
+
+> Static design preview. Rebuild in your own stack using this as the visual and behavioral reference. Not for direct production use.
+
+## Structure
+
+- `index.html` - Landing page (single file, CSS/JS inline)
+- `img*` - Image assets (webp/jpg/png/svg)
+
+## Sections
+
+1. Hero - "Apply daily. Own what's next."
+2. Token intro - "Meet the token behind this airdrop."
+3. Clients - Logo grid
+4. Investors - Coming soon (logos hidden)
+5. How it works - 5 steps
+6. Q&A
+7. Entry CTA - "Ready for your next airdrop entry?"
+
+## Entry Flow (demo)
+
+1. **Buy Now** - Goes to login screen (login required)
+2. After login - **Review entry transaction** modal opens
+3. Select **Base** or **BSC**
+4. **Confirm in wallet** - Modal closes, CTA shows "Already applied today."
+
+No real wallet or on-chain transaction. Demo only.
+
+## Specs
+
+- Daily limit: "One entry per day per account"
+- Gas: Base `0.0002 ETH` / BSC `0.0006 BNB`
+- No entry price, gas only
+- Font: Inter
+- Light mode only
+- Mobile 390px verified
