@@ -1165,6 +1165,9 @@
     .purchase-modal-shell:focus {
       outline: none;
     }
+    .purchase-modal-shell[hidden] {
+      display: none;
+    }
     .purchase-modal-header {
       position: relative;
       display: flex;
@@ -1408,6 +1411,100 @@
       background: #c3c9d2;
       color: #fff;
       cursor: not-allowed;
+    }
+    .purchase-success-view .purchase-modal-header {
+      min-height: 70px;
+      background: #fff;
+    }
+    .purchase-success-view .purchase-modal-title {
+      font-size: 20px;
+    }
+    .purchase-success-body {
+      gap: 0;
+      padding-top: 22px;
+      padding-bottom: 18px;
+    }
+    .purchase-success-summary {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .purchase-success-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+      border-radius: 50%;
+      background: #e5f5ed;
+      color: #23865a;
+    }
+    .purchase-success-icon svg {
+      width: 21px;
+      height: 21px;
+    }
+    .purchase-success-summary h3 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: -.02em;
+    }
+    .purchase-success-summary p {
+      max-width: 390px;
+      margin: 8px 0 18px;
+      color: #66738a;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    .purchase-success-details {
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid #dfe4eb;
+      border-radius: 8px;
+      background: #fbfcfe;
+    }
+    .purchase-success-row {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      padding: 10px 13px;
+    }
+    .purchase-success-row + .purchase-success-row {
+      border-top: 1px solid #e5e9ef;
+    }
+    .purchase-success-row dt {
+      color: #758095;
+      font-size: 11px;
+    }
+    .purchase-success-row dd {
+      min-width: 0;
+      margin: 0;
+      color: #183052;
+      font-size: 11px;
+      font-weight: 600;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+    .purchase-success-row dd.pending {
+      color: #235ea8;
+    }
+    .purchase-success-row dd.transaction {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .purchase-success-next {
+      margin: 14px 0 0;
+      color: #66738a;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+    .purchase-success-view .purchase-modal-footer {
+      padding-top: 14px;
     }
     .login-route[hidden] {
       display: none;
@@ -2121,6 +2218,38 @@
       .purchase-modal-button.primary {
         min-width: 0;
       }
+      .purchase-success-view .purchase-modal-header {
+        min-height: 58px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      .purchase-success-view .purchase-modal-title {
+        font-size: 16px;
+      }
+      .purchase-success-body {
+        padding-top: 14px;
+        padding-bottom: 12px;
+      }
+      .purchase-success-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 9px;
+      }
+      .purchase-success-summary h3 {
+        font-size: 16px;
+      }
+      .purchase-success-summary p {
+        margin: 6px 0 13px;
+        font-size: 11px;
+      }
+      .purchase-success-row {
+        min-height: 36px;
+        padding: 8px 10px;
+      }
+      .purchase-success-next {
+        margin-top: 11px;
+        font-size: 10px;
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -2480,6 +2609,55 @@
         <button class="purchase-modal-button primary js-confirm-purchase" type="button">Confirm in wallet</button>
       </footer>
     </section>
+
+    <section class="purchase-modal-shell purchase-success-view" id="purchase-success-view" role="dialog" aria-modal="true" aria-labelledby="purchase-success-title" aria-describedby="purchase-success-description" tabindex="-1" hidden>
+      <header class="purchase-modal-header">
+        <h2 class="purchase-modal-title" id="purchase-success-title">Entry confirmed</h2>
+        <button class="purchase-modal-close js-close-purchase-modal" type="button" aria-label="Close entry confirmation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+          </svg>
+        </button>
+      </header>
+      <div class="purchase-modal-body purchase-success-body">
+        <div class="purchase-success-summary">
+          <span class="purchase-success-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6.5 12.5L10.2 16L17.8 7.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <h3>Entry Submitted</h3>
+          <p id="purchase-success-description">Your transaction is on chain. The entry appears in My Page once it is counted.</p>
+        </div>
+        <dl class="purchase-success-details" aria-label="Entry confirmation details">
+          <div class="purchase-success-row">
+            <dt>Product</dt>
+            <dd>RWAI Airdrop</dd>
+          </div>
+          <div class="purchase-success-row">
+            <dt>Entries</dt>
+            <dd class="pending">Pending</dd>
+          </div>
+          <div class="purchase-success-row">
+            <dt>Network</dt>
+            <dd id="confirmed-network">Base</dd>
+          </div>
+          <div class="purchase-success-row">
+            <dt>Transaction</dt>
+            <dd class="transaction">0x9263e859...2bfbdc47</dd>
+          </div>
+          <div class="purchase-success-row">
+            <dt>Saved to</dt>
+            <dd>My Page</dd>
+          </div>
+        </dl>
+        <p class="purchase-success-next">Come back after 00:01 UTC for your next entry.</p>
+      </div>
+      <footer class="purchase-modal-footer">
+        <button class="purchase-modal-button secondary js-close-purchase-modal" type="button">Return to Airdrop page</button>
+        <button class="purchase-modal-button primary js-close-purchase-modal" type="button">My Page</button>
+      </footer>
+    </section>
   </div>
 
   <script>
@@ -2522,6 +2700,8 @@
       var purchaseModal = document.getElementById("purchase-modal");
       var purchaseModalBackdrop = purchaseModal.querySelector(".purchase-modal-backdrop");
       var purchaseReviewView = document.getElementById("purchase-review-view");
+      var purchaseSuccessView = document.getElementById("purchase-success-view");
+      var confirmedNetwork = document.getElementById("confirmed-network");
       var modalCloseButtons = purchaseModal.querySelectorAll(".js-close-purchase-modal");
       var purchaseScrollTrigger = document.querySelector(".js-scroll-to-purchase");
       var purchaseSection = document.getElementById("d-purchase");
@@ -2556,18 +2736,35 @@
         loginRoute.hidden = true;
         pageMain.hidden = false;
         window.scrollTo(0, previousScrollY);
+        purchaseReviewView.hidden = false;
+        purchaseSuccessView.hidden = true;
         purchaseModal.hidden = false;
         document.body.classList.add("purchase-modal-open");
         pageMain.setAttribute("inert", "");
         purchaseReviewView.focus();
       }
 
+      function markEntryApplied() {
+        purchaseEntryCta.disabled = true;
+        purchaseEntryCta.setAttribute("aria-label", "Already applied today.");
+        purchaseEntryCta.querySelector("span").textContent = "Already applied today.";
+      }
+
       function closePurchaseModal() {
         if (purchaseModal.hidden) return;
+        if (!purchaseSuccessView.hidden) markEntryApplied();
         purchaseModal.hidden = true;
         document.body.classList.remove("purchase-modal-open");
         pageMain.removeAttribute("inert");
         if (lastModalTrigger) lastModalTrigger.focus();
+      }
+
+      function showPurchaseSuccess() {
+        var selectedTab = purchaseModal.querySelector(".network-tab[aria-selected='true']");
+        confirmedNetwork.textContent = selectedTab ? selectedTab.getAttribute("data-network") : "Base";
+        purchaseReviewView.hidden = true;
+        purchaseSuccessView.hidden = false;
+        purchaseSuccessView.focus();
       }
 
       purchaseScrollTrigger.addEventListener("click", function (event) {
@@ -2590,10 +2787,7 @@
       completeLogin.addEventListener("click", openPurchaseModal);
 
       purchaseConfirm.addEventListener("click", function () {
-        purchaseEntryCta.disabled = true;
-        purchaseEntryCta.setAttribute("aria-label", "Already applied today.");
-        purchaseEntryCta.querySelector("span").textContent = "Already applied today.";
-        closePurchaseModal();
+        showPurchaseSuccess();
       });
 
       modalCloseButtons.forEach(function (button) {
@@ -2612,18 +2806,19 @@
         }
 
         if (event.key !== "Tab") return;
+        var activeModalView = purchaseSuccessView.hidden ? purchaseReviewView : purchaseSuccessView;
         var focusable = Array.prototype.filter.call(
-          purchaseReviewView.querySelectorAll("button:not([disabled]), [href], [tabindex]:not([tabindex='-1'])"),
+          activeModalView.querySelectorAll("button:not([disabled]), [href], [tabindex]:not([tabindex='-1'])"),
           function (item) { return item.offsetParent !== null; }
         );
         if (!focusable.length) {
           event.preventDefault();
-          purchaseReviewView.focus();
+          activeModalView.focus();
           return;
         }
         var first = focusable[0];
         var last = focusable[focusable.length - 1];
-        if (document.activeElement === purchaseReviewView) {
+        if (document.activeElement === activeModalView) {
           event.preventDefault();
           (event.shiftKey ? last : first).focus();
         } else if (event.shiftKey && document.activeElement === first) {
