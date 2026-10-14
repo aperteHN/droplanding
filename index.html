@@ -1,0 +1,2687 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Libre+Franklin:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Airdrop Hero Directions</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --navy: #001a4d;
+      --navy-2: #000a1f;
+      --ink: #061838;
+      --muted: #5f6879;
+      --line: #d8dce3;
+      --paper: #fafaf8;
+      --white: #ffffff;
+      --gold: #d8ad58;
+      --gold-soft: #f1dfb8;
+      --page: #e7e9ed;
+      --label: #121a28;
+      --label-muted: #646b78;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page: #090f19;
+        --label: #f4f6fa;
+        --label-muted: #a7adba;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: auto; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .direction {
+      min-height: 100svh;
+      display: block;
+      padding: 0;
+      scroll-snap-align: start;
+    }
+    .direction-meta {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      color: var(--label);
+      padding: 0 4px 16px;
+    }
+    .direction-id {
+      font: 700 12px/1 "Libre Franklin", sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .direction-note {
+      margin: 0;
+      color: var(--label-muted);
+      font-size: 13px;
+      line-height: 1.45;
+      text-align: right;
+    }
+    .concept {
+      position: relative;
+      min-height: 100svh;
+      overflow: hidden;
+    }
+    .concept-caption {
+      position: absolute;
+      z-index: 20;
+      left: 28px;
+      bottom: 20px;
+      margin: 0;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .04em;
+    }
+    .site-nav {
+      position: relative;
+      z-index: 20;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(26px, 5vw, 72px);
+    }
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+    }
+    .wordmark img {
+      width: 119px;
+      height: 28px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(20px, 3vw, 42px);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--navy);
+      cursor: pointer;
+    }
+    .menu-toggle-lines {
+      position: relative;
+      width: 22px;
+      height: 16px;
+    }
+    .menu-toggle-lines::before,
+    .menu-toggle-lines::after,
+    .menu-toggle-lines span {
+      position: absolute;
+      left: 0;
+      width: 22px;
+      height: 2px;
+      border-radius: 2px;
+      background: currentColor;
+      transition: transform .24s ease, opacity .18s ease, top .24s ease;
+    }
+    .menu-toggle-lines::before { content: ""; top: 0; }
+    .menu-toggle-lines span { top: 7px; }
+    .menu-toggle-lines::after { content: ""; top: 14px; }
+    .nav-link { opacity: .62; }
+    .nav-link.active {
+      opacity: 1;
+      position: relative;
+    }
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -10px;
+      height: 2px;
+      background: currentColor;
+    }
+    .wallet-pill {
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 11px;
+      letter-spacing: .06em;
+      opacity: .84;
+    }
+    .eyebrow {
+      margin: 0 0 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .18em;
+    }
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 24px;
+      border-radius: 5px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: background .18s ease, color .18s ease;
+    }
+    .mini-card {
+      position: relative;
+      width: min(320px, 70%);
+      padding: 22px;
+      background: #fff;
+      color: #071936;
+      box-shadow: 0 24px 54px rgba(0, 20, 60, .16);
+    }
+    .card-top, .card-stat, .card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .card-top strong { font-size: 15px; }
+    .chip {
+      padding: 6px 8px;
+      border-radius: 999px;
+      background: #edf1f7;
+      color: #29405f;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+    .card-stat {
+      align-items: flex-end;
+      margin: 34px 0 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #e6e9ee;
+    }
+    .stat-label { display: block; margin-bottom: 7px; color: #697386; font-size: 10px; }
+    .stat-number { font-size: 27px; line-height: 1; letter-spacing: -.04em; }
+    .stat-note { color: #657189; font-size: 10px; }
+    .card-foot span { color: #768094; font-size: 10px; }
+    .card-button {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 4px;
+      padding: 10px 16px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* Direction D */
+    #direction-d,
+    #direction-d .direction-id {
+      font-family: "Inter", "Noto Sans KR", sans-serif;
+    }
+    .concept-d {
+      overflow: clip;
+      background: #f7f9fc;
+      color: var(--navy);
+      font-family: "Inter", "Noto Sans KR", sans-serif;
+    }
+    .concept-d .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid #e7e9ed;
+    }
+    .d-stage {
+      position: relative;
+      isolation: isolate;
+      min-height: calc(100svh - 180px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(400px, .65fr);
+      align-items: center;
+      gap: clamp(30px, 4vw, 72px);
+      overflow: hidden;
+      padding: 56px clamp(32px, 6vw, 94px) 96px;
+      background: linear-gradient(118deg, #fbfdff 0%, #edf3fa 48%, #dce8f7 100%);
+    }
+    .d-stage::before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      inset: -8%;
+      background: url("img0.webp") center / cover no-repeat;
+      opacity: .92;
+      filter: saturate(.92) contrast(.94);
+      transform: translateX(-8%);
+      -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 56%, rgba(0,0,0,.48) 65%, transparent 78%);
+      mask-image: linear-gradient(90deg, #000 0%, #000 56%, rgba(0,0,0,.48) 65%, transparent 78%);
+      pointer-events: none;
+    }
+    .d-stage::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.97) 0%, rgba(255,255,255,.88) 26%, rgba(255,255,255,.38) 47%, rgba(255,255,255,.1) 67%, rgba(255,255,255,.58) 86%, rgba(255,255,255,.82) 100%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(225,235,248,.12));
+      pointer-events: none;
+    }
+    .d-light-waves {
+      position: absolute;
+      z-index: 2;
+      inset: -12%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .d-wave {
+      position: absolute;
+      border-radius: 50%;
+      will-change: transform, opacity;
+      mix-blend-mode: screen;
+    }
+    .d-wave.one {
+      width: 118%;
+      height: 18%;
+      left: -28%;
+      top: 19%;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.92) 35%, rgba(135,174,229,.48) 56%, rgba(255,255,255,.9) 72%, rgba(255,255,255,0));
+      filter: blur(22px);
+      opacity: .74;
+      animation: dWaveOne 7s cubic-bezier(.45, .05, .55, .95) infinite alternate;
+    }
+    .d-wave.two {
+      width: 112%;
+      height: 21%;
+      right: -27%;
+      bottom: 13%;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(102,146,211,.54) 30%, rgba(255,255,255,.88) 56%, rgba(111,154,217,.38) 75%, rgba(255,255,255,0));
+      filter: blur(26px);
+      opacity: .64;
+      animation: dWaveTwo 8.5s cubic-bezier(.45, .05, .55, .95) infinite alternate;
+    }
+    .d-wave.three {
+      width: 94%;
+      height: 12%;
+      left: 8%;
+      top: 48%;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(117,159,219,.34), rgba(255,255,255,.94), rgba(93,140,207,.3), rgba(255,255,255,0));
+      filter: blur(16px);
+      opacity: .62;
+      animation: dShimmer 5.8s cubic-bezier(.45, .05, .55, .95) infinite;
+    }
+    @keyframes dWaveOne {
+      from { transform: translate3d(-7%, -24%, 0) rotate(-7deg) scaleY(.82); }
+      to { transform: translate3d(11%, 32%, 0) rotate(5deg) scaleY(1.24); }
+    }
+    @keyframes dWaveTwo {
+      from { transform: translate3d(9%, 26%, 0) rotate(7deg) scaleY(.9); }
+      to { transform: translate3d(-12%, -28%, 0) rotate(-6deg) scaleY(1.28); }
+    }
+    @keyframes dShimmer {
+      0%, 100% { transform: translate3d(-18%, 18%, 0) rotate(-8deg) scaleX(.86); opacity: .38; }
+      50% { transform: translate3d(23%, -28%, 0) rotate(5deg) scaleX(1.16); opacity: .76; }
+    }
+    @keyframes dCardFloat {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(-1deg); }
+      50% { transform: translate3d(0, -14px, 0) rotate(.7deg); }
+    }
+    .d-copy {
+      position: relative;
+      z-index: 4;
+      max-width: 650px;
+    }
+    .d-copy .eyebrow,
+    .login-route-copy .eyebrow { color: #3d506f; }
+    .d-copy h2 {
+      max-width: none;
+      margin: 0;
+      font: 600 clamp(32px, 5.1vw, 82px)/.98 "Inter", "Noto Sans KR", sans-serif;
+      letter-spacing: -.068em;
+      white-space: nowrap;
+    }
+    .d-copy h2 .mobile-break { display: block; }
+    .d-copy .sub {
+      max-width: 440px;
+      margin: 28px 0 36px;
+      color: #4b5b74;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .d-copy .btn.primary {
+      background: var(--navy);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(0, 26, 77, .14);
+    }
+    .d-copy .btn.secondary {
+      border: 1px solid #8f9bad;
+      color: var(--navy);
+      background: rgba(255,255,255,.62);
+    }
+    .d-visual {
+      position: relative;
+      z-index: 4;
+      min-width: 0;
+      min-height: 520px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: clamp(0px, 3vw, 48px);
+    }
+    .airdrop-card {
+      width: min(400px, 94%);
+      overflow: hidden;
+      background: rgba(255,255,255,.96);
+      color: #15171a;
+      border: 1px solid #d8dce2;
+      border-radius: 16px;
+      box-shadow: 0 30px 78px rgba(0, 18, 54, .2), 0 2px 8px rgba(0, 18, 54, .06);
+      animation: dCardFloat 6s ease-in-out infinite;
+    }
+    .airdrop-card .catalog-thumb {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      padding: 0;
+      border-bottom: 1px solid #d8dce2;
+      background: #f7f7f8;
+    }
+    .airdrop-card .catalog-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .airdrop-card .catalog-content { padding: 24px; }
+    .airdrop-card .catalog-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .airdrop-card .catalog-title-row h3 {
+      margin: 0;
+      color: var(--navy);
+      font: 600 22px/1.2 "Inter", "Noto Sans KR", sans-serif;
+      letter-spacing: -.035em;
+    }
+    .airdrop-card .airdrop-badge {
+      flex: 0 0 auto;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #e9f0fb;
+      color: #235ea8;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+    .airdrop-card .catalog-field { margin-bottom: 20px; }
+    .airdrop-card .catalog-label {
+      display: block;
+      margin-bottom: 6px;
+      color: #626871;
+      font-size: 11px;
+    }
+    .airdrop-card .catalog-field-value {
+      display: block;
+      color: #15171a;
+      font-size: 16px;
+      line-height: 1.2;
+    }
+    .airdrop-card .quantity-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 13px;
+      border: 1px solid #aeb4bd;
+      border-radius: 999px;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .airdrop-card .catalog-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .airdrop-card .catalog-action {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .airdrop-card .catalog-action.secondary {
+      border: 1px solid #aeb4bd;
+      background: #fff;
+      color: #15171a;
+    }
+    .airdrop-card .catalog-action.primary {
+      border: 1px solid var(--navy);
+      background: var(--navy);
+      color: #fff;
+    }
+    .concept-d .concept-caption {
+      z-index: 6;
+      color: #6a7588;
+    }
+    .d-token-intro {
+      position: relative;
+      z-index: 5;
+      padding: clamp(88px, 10vw, 144px) clamp(32px, 7vw, 110px) clamp(96px, 11vw, 156px);
+      background: #fff;
+      color: var(--navy);
+      border-top: 1px solid #edf0f4;
+    }
+    .d-token-intro h3 {
+      max-width: none;
+      margin: 0 0 clamp(48px, 6vw, 76px);
+      font: 600 clamp(16px, 4.6vw, 68px)/1.04 "Inter", "Noto Sans KR", sans-serif;
+      letter-spacing: -.055em;
+      white-space: nowrap;
+    }
+    .d-token-layout {
+      display: grid;
+      grid-template-columns: clamp(280px, 24vw, 344px) minmax(360px, 1fr);
+      align-items: stretch;
+      gap: clamp(54px, 8vw, 124px);
+    }
+    .d-token-visual {
+      position: relative;
+      order: 1;
+      display: grid;
+      place-items: center;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      align-self: start;
+      overflow: hidden;
+      padding: 0;
+      border-radius: 20px;
+      background: #f5f8fc;
+    }
+    .d-token-visual::after {
+      content: "";
+      position: absolute;
+      inset: auto 9% 7%;
+      height: 13%;
+      border-radius: 50%;
+      background: rgba(21, 68, 126, .12);
+      filter: blur(28px);
+      pointer-events: none;
+    }
+    .d-token-visual img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      object-fit: cover;
+    }
+    .d-token-details {
+      order: 2;
+      display: grid;
+      grid-template-rows: repeat(4, 1fr);
+      min-height: 100%;
+      margin: 0;
+      border-top: 1px solid #d9e0e9;
+    }
+    .d-token-row {
+      display: grid;
+      grid-template-columns: minmax(120px, .72fr) minmax(180px, 1.28fr);
+      gap: 28px;
+      align-items: center;
+      padding: 0;
+      border-bottom: 1px solid #d9e0e9;
+    }
+    .d-token-row dt {
+      color: #66738a;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .d-token-row dd {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0;
+      color: #8490a3;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .d-token-row dd::before {
+      content: "";
+      width: 18px;
+      height: 1px;
+      flex: 0 0 auto;
+      background: #a9b4c4;
+    }
+    .d-clients {
+      position: relative;
+      z-index: 5;
+      padding: clamp(96px, 10vw, 144px) clamp(32px, 7vw, 110px) clamp(104px, 11vw, 156px);
+      background: #fff;
+      color: var(--navy);
+      border-top: 1px solid #edf0f4;
+    }
+    .d-clients h3 {
+      max-width: 790px;
+      margin: 0 0 clamp(44px, 5vw, 68px);
+      font: 600 clamp(36px, 4.4vw, 64px)/1.04 "Inter", "Noto Sans KR", sans-serif;
+      letter-spacing: -.055em;
+    }
+    .d-client-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .d-client-slot {
+      min-height: clamp(112px, 10vw, 152px);
+      display: grid;
+      place-items: center;
+      padding: 24px 18px;
+      border: 1px solid #e8ebf0;
+      border-radius: 10px;
+      background: #fff;
+    }
+    .d-client-logo {
+      width: var(--client-logo-width, 132px);
+      max-width: 84%;
+      max-height: var(--client-logo-height, 56px);
+      object-fit: contain;
+    }
+    .d-client-logo.hyundai { --client-logo-width: 112px; --client-logo-height: 56px; }
+    .d-client-logo.audi { --client-logo-width: 104px; --client-logo-height: 58px; }
+    .d-client-logo.volvo { --client-logo-width: 152px; --client-logo-height: 24px; }
+    .d-client-logo.hanwha { --client-logo-width: 96px; --client-logo-height: 64px; }
+    .d-client-logo.gc-biopharma { --client-logo-width: 154px; --client-logo-height: 36px; }
+    .d-client-logo.bgf { --client-logo-width: 116px; --client-logo-height: 50px; }
+    .d-client-logo.satur { --client-logo-width: 142px; --client-logo-height: 38px; }
+    .d-client-logo.mischief { --client-logo-width: 138px; --client-logo-height: 42px; }
+    .d-client-logo.wooalong { --client-logo-width: 104px; --client-logo-height: 58px; }
+    .d-client-logo.borntowin { --client-logo-width: 132px; --client-logo-height: 54px; }
+    .d-client-logo.freiknock { --client-logo-width: 122px; --client-logo-height: 56px; }
+    .d-client-logo.filluminate { --client-logo-width: 154px; --client-logo-height: 26px; }
+    .d-investors {
+      position: relative;
+      z-index: 5;
+      padding: clamp(96px, 10vw, 144px) clamp(32px, 7vw, 110px) clamp(104px, 11vw, 156px);
+      background: #001a4d;
+      color: #fff;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+    .d-investors h3 {
+      margin: 0 0 clamp(44px, 5vw, 68px);
+      font: 600 clamp(36px, 4.4vw, 64px)/1.04 "Inter", "Noto Sans KR", sans-serif;
+      letter-spacing: -.055em;
+    }
+    .d-investor-marquee {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      border-top: 1px solid rgba(255,255,255,.24);
+      border-bottom: 1px solid rgba(255,255,255,.24);
+    }
+    .d-investor-grid {
+      display: flex;
+      width: max-content;
+      gap: 32px;
+      animation: investorMarquee 24s linear infinite;
+      will-change: transform;
+    }
+    .d-investor-slot {
+      min-width: 0;
+      min-height: 82px;
+      flex: 0 0 clamp(132px, 14vw, 170px);
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border: 0;
+      text-align: center;
+    }
+    .d-investor-name {
+      color: #fff;
+      font: 600 clamp(10px, .9vw, 14px)/1.35 "Inter", "Noto Sans KR", sans-serif;
+      letter-spacing: .055em;
+      text-wrap: balance;
+    }
+    .d-investor-name.compact {
+      font-size: clamp(9px, .78vw, 12px);
+      letter-spacing: .025em;
+    }
+    .d-investor-logo {
+      display: block;
+      width: var(--investor-logo-width, 140px);
+      max-width: 90%;
+      max-height: var(--investor-logo-height, 48px);
+      object-fit: contain;
+    }
+    .d-investor-logo.amber { --investor-logo-width: 136px; --investor-logo-height: 28px; }
+    .d-investor-logo.anti { --investor-logo-width: 142px; --investor-logo-height: 18px; }
+    .d-investor-logo.arkstream { --investor-logo-width: 138px; --investor-logo-height: 42px; }
+    .d-investor-logo.moonhill { --investor-logo-width: 108px; --investor-logo-height: 46px; }
+    .d-investor-logo.uob { --investor-logo-width: 144px; --investor-logo-height: 25px; }
+    .d-investor-slot.is-clone { display: grid; }
+    @keyframes investorMarquee {
+      to { transform: translate3d(calc(-50% - 16px), 0, 0); }
+    }
+    .d-how-to {
+      position: relative;
+      z-index: 5;
+      padding: clamp(96px, 10vw, 144px) clamp(32px, 7vw, 110px) clamp(104px, 11vw, 156px);
+      background: #fff;
+      color: var(--navy);
+      border-top: 1px solid #edf0f4;
+    }
+    .d-how-to-header {
+      margin-bottom: clamp(58px, 7vw, 92px);
+    }
+    .d-how-to h3 {
+      max-width: 720px;
+      margin: 0;
+      font: 600 clamp(40px, 5vw, 72px)/.98 "Inter", "Noto Sans KR", sans-serif;
+      letter-spacing: -.06em;
+    }
+    .d-step-list {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid #bfc9d7;
+      border-bottom: 1px solid #bfc9d7;
+    }
+    .d-step {
+      position: relative;
+      min-width: 0;
+      min-height: 220px;
+      padding: 32px clamp(16px, 2vw, 28px) 30px;
+    }
+    .d-step + .d-step {
+      border-left: 1px solid #d9e0e9;
+    }
+    .d-step-number {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 48px;
+      border: 1px solid #8292aa;
+      border-radius: 50%;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .d-step h4 {
+      margin: 0 0 9px;
+      color: var(--navy);
+      font: 600 clamp(15px, 1.3vw, 19px)/1.2 "Inter", "Noto Sans KR", sans-serif;
+      letter-spacing: -.03em;
+    }
+    .d-step p {
+      margin: 0;
+      color: #66738a;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .d-how-to-notes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(28px, 4vw, 64px);
+      margin-top: clamp(42px, 5vw, 66px);
+    }
+    .d-how-to-note {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr);
+      gap: 18px;
+      margin: 0;
+      color: #52617a;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .d-how-to-note::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      margin-top: .8em;
+      background: #7f90aa;
+    }
+    .d-faq {
+      position: relative;
+      z-index: 5;
+      padding: clamp(96px, 10vw, 144px) clamp(32px, 7vw, 110px) clamp(104px, 11vw, 156px);
+      background: #f4f7fb;
+      color: var(--navy);
+      border-top: 1px solid #e2e7ee;
+    }
+    .d-faq-layout {
+      max-width: 1220px;
+      margin: 0 auto;
+    }
+    .d-faq h3 {
+      margin: 0 0 clamp(48px, 6vw, 76px);
+      font: 600 clamp(40px, 5vw, 72px)/.98 "Inter", "Noto Sans KR", sans-serif;
+      letter-spacing: -.06em;
+      text-align: center;
+    }
+    .d-faq-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 clamp(42px, 6vw, 88px);
+      margin: 0;
+    }
+    .d-faq-column {
+      border-top: 1px solid #bfc9d7;
+    }
+    .d-faq-row {
+      border-bottom: 1px solid #d9e0e9;
+    }
+    .d-faq-row summary {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 72px;
+      padding: 23px 2px;
+      color: #263b60;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.45;
+      cursor: pointer;
+      list-style: none;
+    }
+    .d-faq-row summary::-webkit-details-marker { display: none; }
+    .d-faq-row summary::after {
+      content: "";
+      flex: 0 0 auto;
+      width: 9px;
+      height: 9px;
+      margin-right: 4px;
+      border-right: 1.5px solid #50617b;
+      border-bottom: 1.5px solid #50617b;
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform .36s cubic-bezier(.22, 1, .36, 1);
+    }
+    .d-faq-row[open] summary::after {
+      transform: rotate(225deg) translate(-1px, -1px);
+    }
+    .d-faq-answer {
+      padding: 0 42px 24px 2px;
+      color: #66738a;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+    .d-faq-answer p { margin: 0; }
+    .d-faq-row summary:focus-visible {
+      outline: 2px solid #3d70b8;
+      outline-offset: 4px;
+    }
+    .d-purchase {
+      position: relative;
+      z-index: 5;
+      isolation: isolate;
+      overflow: hidden;
+      padding: clamp(96px, 10vw, 144px) clamp(32px, 7vw, 110px) clamp(104px, 11vw, 156px);
+      background:
+        radial-gradient(ellipse at 12% 18%, rgba(92, 145, 214, .2) 0%, rgba(92, 145, 214, .05) 38%, transparent 64%),
+        radial-gradient(ellipse at 88% 78%, rgba(18, 67, 132, .12) 0%, rgba(18, 67, 132, .025) 40%, transparent 66%),
+        linear-gradient(132deg, #fcfdff 0%, #f5f8fc 46%, #eaf0f7 100%);
+      color: var(--navy);
+      border-top: 1px solid #d6e1ef;
+      scroll-margin-top: 24px;
+    }
+    .d-purchase-light-waves {
+      position: absolute;
+      z-index: 0;
+      inset: -24% -12%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .d-purchase-wave {
+      position: absolute;
+      border-radius: 50%;
+      will-change: transform, opacity;
+      mix-blend-mode: screen;
+    }
+    .d-purchase-wave.one {
+      width: 112%;
+      height: 24%;
+      left: -28%;
+      top: 18%;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.96) 33%, rgba(116,158,218,.44) 56%, rgba(255,255,255,.9) 73%, rgba(255,255,255,0));
+      filter: blur(24px);
+      opacity: .66;
+      animation: purchaseWaveOne 7s cubic-bezier(.45, .05, .55, .95) infinite alternate;
+    }
+    .d-purchase-wave.two {
+      width: 108%;
+      height: 27%;
+      right: -26%;
+      bottom: 11%;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(105,151,215,.42) 28%, rgba(255,255,255,.94) 54%, rgba(100,145,210,.34) 76%, rgba(255,255,255,0));
+      filter: blur(28px);
+      opacity: .58;
+      animation: purchaseWaveTwo 8.5s cubic-bezier(.45, .05, .55, .95) infinite alternate;
+    }
+    .d-purchase-wave.three {
+      width: 90%;
+      height: 14%;
+      left: 9%;
+      top: 49%;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(112,155,216,.3), rgba(255,255,255,.96), rgba(89,137,204,.28), rgba(255,255,255,0));
+      filter: blur(18px);
+      opacity: .56;
+      animation: purchaseShimmer 5.8s cubic-bezier(.45, .05, .55, .95) infinite;
+    }
+    @keyframes purchaseWaveOne {
+      from { transform: translate3d(-8%, -28%, 0) rotate(-7deg) scaleY(.84); }
+      to { transform: translate3d(12%, 34%, 0) rotate(5deg) scaleY(1.2); }
+    }
+    @keyframes purchaseWaveTwo {
+      from { transform: translate3d(10%, 25%, 0) rotate(7deg) scaleY(.9); }
+      to { transform: translate3d(-13%, -30%, 0) rotate(-6deg) scaleY(1.24); }
+    }
+    @keyframes purchaseShimmer {
+      0%, 100% { transform: translate3d(-20%, 18%, 0) rotate(-8deg) scaleX(.86); opacity: .32; }
+      50% { transform: translate3d(25%, -28%, 0) rotate(5deg) scaleX(1.14); opacity: .7; }
+    }
+    .d-purchase-layout {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(380px, .85fr);
+      gap: clamp(56px, 9vw, 140px);
+      align-items: center;
+      max-width: 1220px;
+      margin: 0 auto;
+    }
+    .d-purchase-copy h3 {
+      max-width: 680px;
+      margin: 0;
+      font: 600 clamp(52px, 6.1vw, 92px)/.98 "Inter", "Noto Sans KR", sans-serif;
+      letter-spacing: -.068em;
+    }
+    .d-purchase-copy p {
+      max-width: 420px;
+      margin: 22px 0 0;
+      color: #66738a;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .purchase-airdrop-card {
+      width: min(400px, 100%);
+      justify-self: end;
+      animation: none;
+    }
+    .purchase-airdrop-card .catalog-actions {
+      grid-template-columns: 1fr;
+    }
+    .purchase-airdrop-card .catalog-action {
+      border: 0;
+      cursor: pointer;
+    }
+    @property --entry-beam-angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
+    }
+    .purchase-airdrop-card .entry-cta {
+      --entry-beam-angle: 0deg;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      border: 2px solid transparent;
+      background:
+        linear-gradient(var(--navy), var(--navy)) padding-box,
+        conic-gradient(
+          from var(--entry-beam-angle),
+          rgba(132, 188, 255, .12) 0deg,
+          rgba(255, 255, 255, 1) 18deg,
+          rgba(112, 178, 255, .94) 42deg,
+          rgba(112, 178, 255, 0) 78deg,
+          rgba(112, 178, 255, 0) 360deg
+        ) border-box;
+      box-shadow: 0 10px 22px rgba(0, 26, 77, .2);
+      animation:
+        entryCtaPulse 2.8s cubic-bezier(.45, .05, .55, .95) infinite,
+        entryCtaBorderBeam 2.4s linear infinite;
+    }
+    .purchase-airdrop-card .entry-cta span {
+      position: relative;
+      z-index: 2;
+    }
+    .purchase-airdrop-card .entry-cta:disabled {
+      min-height: 54px;
+      padding: 8px 18px;
+      border-color: #cfd5de;
+      background: #dfe3e9;
+      color: #697386;
+      box-shadow: none;
+      white-space: normal;
+      line-height: 1.35;
+      cursor: not-allowed;
+      transform: none;
+      transition: none;
+      animation: none;
+    }
+    .purchase-airdrop-card .entry-cta:disabled::after {
+      display: none;
+    }
+    .purchase-airdrop-card .entry-cta::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: -50% auto -50% -42%;
+      width: 28%;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.42), rgba(255,255,255,0));
+      transform: translateX(-180%) skewX(-18deg);
+      animation: entryCtaSweep 2.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes entryCtaPulse {
+      0%, 100% { box-shadow: 0 10px 22px rgba(0, 26, 77, .18), 0 0 0 0 rgba(50, 101, 169, 0); }
+      46% { box-shadow: 0 13px 28px rgba(0, 26, 77, .26), 0 0 0 7px rgba(50, 101, 169, .12); }
+      70% { box-shadow: 0 10px 22px rgba(0, 26, 77, .2), 0 0 0 11px rgba(50, 101, 169, 0); }
+    }
+    @keyframes entryCtaBorderBeam {
+      to { --entry-beam-angle: 360deg; }
+    }
+    @keyframes entryCtaSweep {
+      0%, 28% { transform: translateX(-180%) skewX(-18deg); opacity: 0; }
+      40% { opacity: 1; }
+      68%, 100% { transform: translateX(720%) skewX(-18deg); opacity: 0; }
+    }
+    .d-purchase-card {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 3vw, 42px);
+      border: 1px solid #d9e0e9;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 22px 58px rgba(0, 26, 77, .08);
+    }
+    .d-purchase-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--navy);
+      opacity: .9;
+    }
+    .d-purchase-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid #e2e7ee;
+    }
+    .d-purchase-card h4 {
+      margin: 0;
+      color: var(--navy);
+      font: 600 clamp(20px, 2vw, 28px)/1.2 "Inter", "Noto Sans KR", sans-serif;
+      letter-spacing: -.04em;
+    }
+    .d-purchase-badge {
+      flex: 0 0 auto;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #e9f0fb;
+      color: #235ea8;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .05em;
+    }
+    .d-purchase-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin: 0;
+      padding: 30px 0;
+    }
+    .d-purchase-stat {
+      min-width: 0;
+    }
+    .d-purchase-stat + .d-purchase-stat {
+      padding-left: 28px;
+      border-left: 1px solid #e2e7ee;
+    }
+    .d-purchase-stat dt {
+      margin-bottom: 9px;
+      color: #66738a;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .d-purchase-stat dd {
+      margin: 0;
+      color: #15171a;
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+    .d-purchase-action {
+      width: 100%;
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--navy);
+      border-radius: 10px;
+      background: var(--navy);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition:
+        transform .46s cubic-bezier(.22, 1, .36, 1),
+        background-color .82s cubic-bezier(.22, 1, .36, 1),
+        border-color .82s cubic-bezier(.22, 1, .36, 1),
+        box-shadow .48s cubic-bezier(.22, 1, .36, 1);
+    }
+    .d-purchase-action:focus-visible {
+      outline: 2px solid #3d70b8;
+      outline-offset: 4px;
+    }
+
+    body.purchase-modal-open {
+      overflow: hidden;
+    }
+    .purchase-modal-layer {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+    }
+    .purchase-modal-layer[hidden] {
+      display: none;
+    }
+    .purchase-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .4);
+    }
+    .purchase-modal-shell {
+      position: relative;
+      z-index: 1;
+      width: min(480px, calc(100vw - 32px));
+      max-height: 90vh;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      overflow: hidden;
+      border: 1px solid #d8dce3;
+      border-radius: 8px;
+      background: #fff;
+      color: #15171a;
+      box-shadow: 0 16px 40px rgba(0, 18, 54, .2), 0 2px 8px rgba(0, 18, 54, .08);
+      font-family: "Inter", "Noto Sans KR", sans-serif;
+    }
+    .purchase-modal-shell:focus {
+      outline: none;
+    }
+    .purchase-modal-header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 88px;
+      padding: 16px 64px 16px 28px;
+      border-bottom: 1px solid #d8dce3;
+      background: linear-gradient(100deg, #f4f8fd 0%, #fff 72%);
+    }
+    .purchase-modal-brand {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .purchase-modal-visual {
+      width: 54px;
+      height: 54px;
+      flex: 0 0 auto;
+      overflow: hidden;
+      border: 1px solid #d3dce8;
+      border-radius: 10px;
+      background: #eaf1f9;
+      box-shadow: 0 8px 18px rgba(0, 26, 77, .12);
+    }
+    .purchase-modal-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .purchase-modal-heading {
+      min-width: 0;
+    }
+    .purchase-modal-kicker {
+      display: block;
+      margin-bottom: 4px;
+      color: #4e6e99;
+      font-size: 9px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: .1em;
+    }
+    .purchase-modal-title {
+      margin: 0;
+      color: var(--navy);
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: -.02em;
+    }
+    .purchase-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: #445269;
+      cursor: pointer;
+    }
+    .purchase-modal-close:hover {
+      background: #f1f4f8;
+      color: var(--navy);
+    }
+    .purchase-modal-close:focus-visible,
+    .network-tab:focus-visible,
+    .purchase-modal-button:focus-visible {
+      outline: 2px solid #3d70b8;
+      outline-offset: 2px;
+    }
+    .purchase-modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 24px 32px;
+      overscroll-behavior: contain;
+    }
+    .purchase-modal-description {
+      margin: 0;
+      color: #66738a;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .purchase-modal-product {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #e4e7ec;
+    }
+    .purchase-modal-label {
+      color: #66738a;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .purchase-modal-product strong {
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .network-selector-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #3e4b60;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .network-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid #d8dce3;
+      border-radius: 8px;
+      background: #f4f6f9;
+    }
+    .network-tab {
+      min-height: 40px;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      color: #66738a;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .network-tab[aria-selected="true"] {
+      background: #fff;
+      color: var(--navy);
+      box-shadow: 0 1px 4px rgba(0, 18, 54, .12);
+    }
+    .purchase-review-list {
+      margin: 0;
+      border-top: 1px solid #e4e7ec;
+    }
+    .purchase-review-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 44px;
+      padding: 11px 0;
+      border-bottom: 1px solid #e4e7ec;
+    }
+    .purchase-review-row dt {
+      color: #66738a;
+      font-size: 12px;
+    }
+    .purchase-review-row dd {
+      margin: 0;
+      color: #15171a;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: right;
+    }
+    .purchase-review-row dd.entry-value {
+      color: #235ea8;
+    }
+    .purchase-status {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .purchase-status-title {
+      margin: 0;
+      color: #3e4b60;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .purchase-status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: #334058;
+      font-size: 12px;
+    }
+    .purchase-status-value {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: #66738a;
+      white-space: nowrap;
+    }
+    .purchase-status-value::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #aeb6c3;
+    }
+    .purchase-modal-notice {
+      margin: 0;
+      padding: 12px 14px;
+      border-radius: 6px;
+      background: #f1f5fa;
+      color: #53627a;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+    .purchase-modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 16px 32px 24px;
+      border-top: 1px solid #d8dce3;
+    }
+    .purchase-modal-button {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .purchase-modal-button.secondary {
+      border: 1px solid #aeb6c3;
+      background: #fff;
+      color: #26364f;
+    }
+    .purchase-modal-button.primary {
+      min-width: 152px;
+      border: 1px solid var(--navy);
+      background: var(--navy);
+      color: #fff;
+    }
+    .purchase-modal-button.primary:disabled {
+      border-color: #c3c9d2;
+      background: #c3c9d2;
+      color: #fff;
+      cursor: not-allowed;
+    }
+    .login-route[hidden] {
+      display: none;
+    }
+    .login-route {
+      min-height: 100svh;
+      background: #f7f9fc;
+      color: var(--navy);
+      font-family: "Inter", "Noto Sans KR", sans-serif;
+    }
+    .login-route-nav {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(26px, 5vw, 72px);
+      border-bottom: 1px solid #e7e9ed;
+      background: #fff;
+    }
+    .login-route-back {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 4px;
+      border: 0;
+      background: transparent;
+      color: #4b5b74;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .login-route-back::before {
+      content: "‹";
+      color: var(--navy);
+      font-size: 21px;
+      line-height: 1;
+    }
+    .login-route-main {
+      min-height: calc(100svh - 80px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(400px, .65fr);
+      align-items: center;
+      gap: clamp(30px, 4vw, 72px);
+      overflow: hidden;
+      padding: 56px clamp(32px, 6vw, 94px) 96px;
+    }
+    .login-route-copy {
+      max-width: 650px;
+    }
+    .login-route-copy h1 {
+      margin: 0;
+      font: 600 clamp(32px, 5.1vw, 82px)/.98 "Inter", "Noto Sans KR", sans-serif;
+      letter-spacing: -.068em;
+    }
+    .login-route-copy p {
+      max-width: 440px;
+      margin: 28px 0 36px;
+      color: #4b5b74;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .login-route-panel {
+      padding: clamp(28px, 3vw, 40px);
+      border: 1px solid #d9e0e9;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 22px 58px rgba(0, 26, 77, .08);
+    }
+    .login-route-panel h2 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font: 600 22px/1.2 "Inter", "Noto Sans KR", sans-serif;
+      letter-spacing: -.035em;
+    }
+    .login-route-panel p {
+      margin: 0 0 24px;
+      color: #66738a;
+      font: 400 13px/1.6 "Inter", "Noto Sans KR", sans-serif;
+    }
+    .login-route-continue {
+      width: 100%;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--navy);
+      border-radius: 9px;
+      background: var(--navy);
+      color: #fff;
+      font: 700 13px/1 "Inter", "Noto Sans KR", sans-serif;
+      cursor: pointer;
+    }
+    .login-route-back:focus-visible,
+    .login-route-continue:focus-visible {
+      outline: 2px solid #3d70b8;
+      outline-offset: 3px;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .login-route-back:hover { color: var(--navy); }
+      .login-route-continue:hover { background: #08285d; }
+    }
+
+    /* Quiet motion layer */
+    .motion-ready .reveal {
+      opacity: 0;
+      transform: translate3d(0, 18px, 0);
+      transition:
+        opacity .72s cubic-bezier(.22, 1, .36, 1),
+        transform .72s cubic-bezier(.22, 1, .36, 1);
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: opacity, transform;
+    }
+    .motion-ready .reveal.is-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .wordmark,
+    .nav-link,
+    .btn,
+    .catalog-action,
+    .airdrop-card,
+    .d-token-visual,
+    .d-client-slot,
+    .d-investor-slot,
+    .d-step,
+    .d-purchase-card {
+      transition:
+        transform .46s cubic-bezier(.22, 1, .36, 1),
+        opacity .36s ease,
+        color .82s cubic-bezier(.22, 1, .36, 1),
+        background-color .82s cubic-bezier(.22, 1, .36, 1),
+        border-color .82s cubic-bezier(.22, 1, .36, 1),
+        box-shadow .48s cubic-bezier(.22, 1, .36, 1),
+        filter .42s ease;
+    }
+    .d-client-logo,
+    .d-investor-logo,
+    .d-investor-name,
+    .d-step-number {
+      transition:
+        opacity .82s cubic-bezier(.22, 1, .36, 1),
+        color .82s cubic-bezier(.22, 1, .36, 1),
+        background-color .82s cubic-bezier(.22, 1, .36, 1),
+        border-color .82s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .wordmark:hover { opacity: .72; transform: translateY(-1px); }
+      .nav-link:hover { opacity: .88; }
+      .nav-link.active:hover { opacity: 1; }
+      .btn:hover,
+      .catalog-action:not(:disabled):hover { transform: translateY(-2px); }
+      .d-copy .btn.primary:hover,
+      .airdrop-card .catalog-action.primary:hover {
+        background: #08285d;
+        box-shadow: 0 14px 30px rgba(0, 26, 77, .2);
+      }
+      .d-copy .btn.secondary:hover,
+      .airdrop-card .catalog-action.secondary:hover {
+        border-color: #596b85;
+        background: rgba(255,255,255,.92);
+      }
+      .airdrop-card:hover {
+        box-shadow: 0 36px 88px rgba(0, 18, 54, .23), 0 4px 12px rgba(0, 18, 54, .08);
+        filter: saturate(1.025);
+      }
+      .d-token-visual:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 44px rgba(0, 26, 77, .11);
+      }
+      .d-client-slot:hover {
+        transform: translateY(-3px);
+        border-color: #cbd3df;
+        background: #fff;
+        box-shadow: 0 14px 34px rgba(0, 26, 77, .07);
+      }
+      .d-client-slot:hover .d-client-logo { opacity: .7; }
+      .d-investor-slot:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255,255,255,.64);
+        background: rgba(255,255,255,.055);
+      }
+      .d-investor-slot:hover .d-investor-logo,
+      .d-investor-slot:hover .d-investor-name { opacity: .76; }
+      .d-step:hover {
+        background: #f7f9fc;
+        transform: translateY(-3px);
+      }
+      .d-step:hover .d-step-number {
+        border-color: var(--navy);
+        background: var(--navy);
+        color: #fff;
+      }
+      .d-purchase-card:hover {
+        transform: translateY(-3px);
+        border-color: #cbd3df;
+        box-shadow: 0 28px 66px rgba(0, 26, 77, .11);
+      }
+      .d-purchase-action:hover {
+        transform: translateY(-2px);
+        background: #08285d;
+        border-color: #08285d;
+        box-shadow: 0 14px 30px rgba(0, 26, 77, .18);
+      }
+      .purchase-airdrop-card .entry-cta:not(:disabled):hover {
+        border-color: transparent;
+        background:
+          linear-gradient(#08285d, #08285d) padding-box,
+          conic-gradient(
+            from var(--entry-beam-angle),
+            rgba(132, 188, 255, .16) 0deg,
+            rgba(255, 255, 255, 1) 18deg,
+            rgba(112, 178, 255, 1) 42deg,
+            rgba(112, 178, 255, 0) 78deg,
+            rgba(112, 178, 255, 0) 360deg
+          ) border-box;
+      }
+    }
+
+    .btn:focus-visible,
+    .catalog-action:focus-visible,
+    .wordmark:focus-visible {
+      outline: 2px solid #3d70b8;
+      outline-offset: 4px;
+    }
+
+    @media (min-width: 821px) {
+      .d-client-grid { gap: 10px; }
+      .d-client-slot {
+        min-height: clamp(104px, 9vw, 136px);
+        padding: 20px 14px;
+      }
+      .d-client-logo {
+        max-width: 76%;
+        max-height: 48px;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .site-nav,
+      .d-stage,
+      .d-token-intro,
+      .d-clients,
+      .d-investors,
+      .d-how-to,
+      .d-faq,
+      .d-purchase,
+      .login-route-main {
+        padding-left: max(30px, calc((100% - 1220px) / 2));
+        padding-right: max(30px, calc((100% - 1220px) / 2));
+      }
+    }
+
+    @media (max-width: 820px) {
+      .direction { padding: 0; min-height: auto; }
+      .concept { min-height: auto; }
+      .site-nav { height: 66px; padding: 0 14px 0 20px; }
+      .menu-toggle { display: inline-flex; }
+      .menu-toggle:focus-visible {
+        outline: 2px solid #3d70b8;
+        outline-offset: 0;
+        border-radius: 4px;
+      }
+      .nav-links {
+        position: absolute;
+        top: 66px;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 20px 18px;
+        border-bottom: 1px solid #e1e5eb;
+        background: #fff;
+        box-shadow: 0 16px 28px rgba(0, 26, 77, .1);
+        color: var(--navy);
+        font-size: 14px;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transition: opacity .2s ease, transform .24s ease, visibility .2s ease;
+      }
+      .nav-link,
+      .wallet-pill {
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 2px;
+      }
+      .nav-link + .nav-link,
+      .wallet-pill {
+        border-top: 1px solid #edf0f4;
+      }
+      .wallet-pill {
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 0;
+        border-radius: 0;
+        font-size: 12px;
+      }
+      .nav-link.active::after {
+        left: 2px;
+        right: auto;
+        bottom: 7px;
+        width: 42px;
+      }
+      .site-nav.menu-open .nav-links {
+        display: flex;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+      .site-nav.menu-open .menu-toggle-lines::before { top: 7px; transform: rotate(45deg); }
+      .site-nav.menu-open .menu-toggle-lines span { opacity: 0; }
+      .site-nav.menu-open .menu-toggle-lines::after { top: 7px; transform: rotate(-45deg); }
+      .wordmark img { width: 106px; height: auto; }
+      .concept-caption { position: static; padding: 18px 20px; line-height: 1.5; }
+
+      .d-stage {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        align-content: start;
+        gap: 0;
+        padding: 54px 22px 44px;
+      }
+      .d-stage::before {
+        inset: 0;
+        height: auto;
+        background-position: 57% 10px;
+        background-size: 560px 560px;
+        background-repeat: no-repeat;
+        opacity: .92;
+        transform: none;
+        -webkit-mask-image: linear-gradient(180deg, #000 0, #000 280px, rgba(0,0,0,.86) 360px, rgba(0,0,0,.34) 460px, transparent 545px);
+        mask-image: linear-gradient(180deg, #000 0, #000 280px, rgba(0,0,0,.86) 360px, rgba(0,0,0,.34) 460px, transparent 545px);
+      }
+      .d-stage::after {
+        background:
+          linear-gradient(90deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.84) 42%, rgba(255,255,255,.28) 78%, rgba(255,255,255,.06) 100%),
+          linear-gradient(180deg, rgba(247,249,252,.12) 0, rgba(247,249,252,.08) 320px, rgba(247,249,252,.72) 470px, #f7f9fc 560px, #f7f9fc 100%);
+      }
+      .d-light-waves { inset: -8% -55%; }
+      .d-wave.one { top: 34%; height: 13%; }
+      .d-wave.two { bottom: 10%; height: 16%; }
+      .d-wave.three { top: 60%; height: 10%; }
+      .d-copy h2 { max-width: none; }
+      .d-copy .sub { margin: 20px 0 26px; font-size: 14px; }
+      .d-visual {
+        min-height: 380px;
+        justify-content: center;
+        align-items: flex-end;
+        margin-top: 56px;
+        padding: 0;
+      }
+      .airdrop-card { width: min(370px, 100%); }
+      .airdrop-card .catalog-thumb { aspect-ratio: 1 / 1; }
+      .airdrop-card .catalog-content { padding: 22px; }
+      .d-token-intro {
+        padding: 76px 22px 88px;
+      }
+      .d-token-intro h3 {
+        max-width: 580px;
+        margin-bottom: 42px;
+      }
+      .d-token-layout {
+        grid-template-columns: minmax(112px, 30vw) minmax(0, 1fr);
+        align-items: start;
+        gap: 24px;
+      }
+      .d-token-visual {
+        order: 1;
+        width: 100%;
+        max-width: 180px;
+        justify-self: start;
+        border-radius: 16px;
+      }
+      .d-token-details {
+        order: 2;
+        grid-template-rows: repeat(4, auto);
+        min-height: 0;
+      }
+      .d-token-row {
+        grid-template-columns: minmax(108px, .7fr) minmax(160px, 1.3fr);
+        padding: 22px 0;
+      }
+      .d-token-row dt { font-size: 11px; }
+      .d-token-row dd { font-size: 13px; }
+      .d-clients {
+        padding: 76px 22px 88px;
+      }
+      .d-clients h3 {
+        margin-bottom: 38px;
+      }
+      .d-client-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .d-client-slot {
+        min-height: 108px;
+      }
+      .d-client-logo {
+        max-width: 76%;
+        max-height: 52px;
+      }
+      .d-investors {
+        padding: 76px 22px 88px;
+      }
+      .d-investors h3 {
+        margin-bottom: 38px;
+      }
+      .d-investor-marquee {
+        display: block;
+        width: calc(100% + 44px);
+        margin-left: -22px;
+        overflow: hidden;
+        border-top: 0;
+        border-bottom: 0;
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+        mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+      }
+      .d-investor-grid {
+        display: flex;
+        width: max-content;
+        gap: 32px;
+        animation: investorMarquee 24s linear infinite;
+        will-change: transform;
+      }
+      .d-investor-slot,
+      .d-investor-slot.is-clone {
+        display: grid;
+        min-width: max-content;
+        min-height: 56px;
+        flex: 0 0 auto;
+        padding: 0;
+        border: 0;
+      }
+      .d-investor-logo {
+        width: var(--investor-logo-width, 140px);
+        max-width: none;
+      }
+      .d-investor-name,
+      .d-investor-name.compact {
+        font-size: 12px;
+        line-height: 1;
+        letter-spacing: .055em;
+        white-space: nowrap;
+      }
+      .d-how-to {
+        padding: 76px 22px 88px;
+      }
+      .d-how-to-header {
+        margin-bottom: 50px;
+      }
+      .d-how-to h3 {
+        max-width: 600px;
+        font-size: clamp(38px, 9.2vw, 58px);
+      }
+      .d-step-list {
+        grid-template-columns: 1fr;
+        border-bottom: 0;
+      }
+      .d-step {
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr);
+        column-gap: 18px;
+        padding: 24px 0;
+        border-bottom: 1px solid #d9e0e9;
+      }
+      .d-step + .d-step {
+        border-left: 0;
+      }
+      .d-step-number {
+        grid-row: 1 / span 2;
+        width: 34px;
+        height: 34px;
+        margin: 0;
+      }
+      .d-step h4 {
+        align-self: end;
+        margin-bottom: 6px;
+        font-size: 17px;
+      }
+      .d-step p {
+        grid-column: 2;
+      }
+      .d-how-to-notes {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-top: 42px;
+      }
+      .d-faq {
+        padding: 76px 22px 88px;
+      }
+      .d-faq h3 {
+        margin-bottom: 50px;
+        font-size: clamp(38px, 9.2vw, 58px);
+      }
+      .d-faq-list {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .d-faq-column + .d-faq-column {
+        border-top: 0;
+      }
+      .d-faq-row summary {
+        min-height: 68px;
+        padding: 22px 2px;
+      }
+      .d-faq-answer { padding-bottom: 22px; }
+      .d-purchase {
+        padding: 76px 22px 88px;
+      }
+      .d-purchase-light-waves { inset: -10% -70%; }
+      .d-purchase-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .purchase-airdrop-card {
+        justify-self: center;
+      }
+      .d-purchase-copy h3 {
+        max-width: 600px;
+        font-size: clamp(38px, 9.2vw, 58px);
+      }
+      .d-purchase-card {
+        padding: 28px;
+      }
+      .login-route-nav {
+        height: 66px;
+        padding: 0 14px 0 20px;
+      }
+      .login-route-main {
+        min-height: calc(100svh - 66px);
+        grid-template-columns: 1fr;
+        align-content: start;
+        gap: 56px;
+        padding: 54px 22px 44px;
+      }
+      .login-route-copy p {
+        margin: 20px 0 26px;
+        font-size: 14px;
+      }
+      .login-route-panel {
+        padding: 26px 22px;
+      }
+    }
+    @media (max-width: 420px) {
+      .nav-links { gap: 12px; }
+      .btn { min-height: 45px; padding: 0 18px; }
+      .mini-card { padding: 18px; }
+      .card-stat { margin: 26px 0 18px; }
+      .d-stage { padding: 46px 18px 40px; }
+      .d-stage::before { inset: 0; height: auto; min-height: 0; max-height: none; background-position: 58% 8px; background-size: 520px 520px; background-repeat: no-repeat; transform: none; }
+      .d-visual { min-height: 410px; margin-top: 40px; }
+      .airdrop-card { width: 100%; }
+      .airdrop-card .catalog-content { padding: 20px; }
+      .airdrop-card .catalog-title-row h3 { font-size: 20px; }
+      .d-token-intro { padding: 66px 18px 76px; }
+      .d-token-intro h3 {
+        margin-bottom: 34px;
+      }
+      .d-token-layout {
+        grid-template-columns: minmax(96px, 29vw) minmax(0, 1fr);
+        gap: 18px;
+      }
+      .d-token-visual { padding: 10px; border-radius: 14px; }
+      .d-token-row {
+        grid-template-columns: 1fr;
+        gap: 7px;
+        padding: 14px 0;
+      }
+      .d-token-row dt { font-size: 10px; }
+      .d-token-row dd { gap: 8px; font-size: 11px; }
+      .d-token-row dd::before { width: 12px; }
+      .d-clients { padding: 66px 18px 76px; }
+      .d-clients h3 {
+        margin-bottom: 32px;
+        font-size: clamp(34px, 10.5vw, 46px);
+      }
+      .d-client-slot { min-height: 92px; padding: 18px 12px; }
+      .d-client-logo { max-width: 78%; max-height: 44px; }
+      .d-investors { padding: 66px 18px 76px; }
+      .d-investors h3 {
+        margin-bottom: 32px;
+        font-size: clamp(34px, 10.5vw, 46px);
+      }
+      .d-investor-marquee {
+        width: calc(100% + 36px);
+        margin-left: -18px;
+      }
+      .d-investor-slot,
+      .d-investor-slot.is-clone {
+        min-height: 52px;
+        padding: 0;
+      }
+      .d-investor-name,
+      .d-investor-name.compact {
+        font-size: 11px;
+        letter-spacing: .045em;
+      }
+      .d-how-to { padding: 66px 18px 76px; }
+      .d-how-to-header { margin-bottom: 42px; }
+      .d-how-to h3 { font-size: clamp(34px, 10.5vw, 46px); }
+      .d-step { grid-template-columns: 38px minmax(0, 1fr); column-gap: 14px; padding: 21px 0; }
+      .d-step h4 { font-size: 16px; }
+      .d-step p { font-size: 11px; }
+      .d-how-to-note { grid-template-columns: 18px minmax(0, 1fr); gap: 12px; font-size: 12px; }
+      .d-how-to-note::before { width: 18px; }
+      .d-faq { padding: 66px 18px 76px; }
+      .d-faq h3 { margin-bottom: 40px; font-size: clamp(34px, 10.5vw, 46px); }
+      .d-faq-row summary {
+        min-height: 62px;
+        gap: 18px;
+        padding: 19px 2px;
+        font-size: 12px;
+      }
+      .d-faq-answer {
+        padding: 0 34px 20px 2px;
+        font-size: 11px;
+        line-height: 1.6;
+      }
+      .d-purchase { padding: 66px 18px 76px; }
+      .d-purchase-layout { gap: 38px; }
+      .d-purchase-copy h3 { font-size: clamp(34px, 10.5vw, 46px); }
+      .d-purchase-copy p { margin-top: 18px; font-size: 12px; }
+      .d-purchase-card { padding: 24px 20px 20px; border-radius: 14px; }
+      .d-purchase-card-head { padding-bottom: 22px; }
+      .d-purchase-card h4 { font-size: 20px; }
+      .d-purchase-stats { padding: 24px 0; }
+      .d-purchase-stat + .d-purchase-stat { padding-left: 18px; }
+      .d-purchase-stat dt { font-size: 10px; }
+      .d-purchase-stat dd { font-size: 15px; }
+      .d-purchase-action { min-height: 48px; }
+      .login-route-main { padding: 46px 18px 40px; }
+    }
+    @media (max-width: 520px) {
+      .purchase-modal-layer {
+        padding: 20px;
+      }
+      .purchase-modal-shell {
+        width: min(360px, calc(100vw - 40px));
+        max-height: 78vh;
+        max-height: 78svh;
+      }
+      .purchase-modal-header {
+        min-height: 72px;
+        padding: 12px 48px 12px 20px;
+      }
+      .purchase-modal-brand {
+        gap: 11px;
+      }
+      .purchase-modal-visual {
+        width: 46px;
+        height: 46px;
+        border-radius: 8px;
+      }
+      .purchase-modal-close {
+        top: 8px;
+        right: 8px;
+        width: 38px;
+        height: 38px;
+      }
+      .purchase-modal-title {
+        font-size: 15px;
+      }
+      .purchase-modal-kicker {
+        margin-bottom: 3px;
+        font-size: 8px;
+      }
+      .purchase-modal-body {
+        gap: 10px;
+        padding: 14px 24px;
+      }
+      .purchase-modal-product {
+        gap: 14px;
+        padding-bottom: 10px;
+      }
+      .network-selector-label {
+        margin-bottom: 6px;
+      }
+      .network-tab {
+        min-height: 36px;
+      }
+      .purchase-review-row {
+        min-height: 38px;
+        padding: 8px 0;
+      }
+      .purchase-status {
+        gap: 7px;
+      }
+      .purchase-modal-notice {
+        padding: 9px 11px;
+        line-height: 1.45;
+      }
+      .purchase-modal-footer {
+        padding: 12px 24px 16px;
+      }
+      .purchase-modal-button {
+        min-height: 40px;
+        flex: 1 1 0;
+        padding: 0 10px;
+      }
+      .purchase-modal-button.primary {
+        min-width: 0;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .d-wave,
+      .d-purchase-wave,
+      .airdrop-card,
+      .d-investor-grid,
+      .entry-cta,
+      .entry-cta::after { animation: none; }
+      .motion-ready .reveal,
+      .motion-ready .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .login-route-back,
+      .login-route-continue {
+        transition: none;
+      }
+      .wordmark,
+      .nav-link,
+      .btn,
+      .catalog-action,
+      .airdrop-card,
+      .d-token-visual,
+      .d-client-slot,
+      .d-investor-slot,
+      .d-step,
+      .d-purchase-card,
+      .d-purchase-action,
+      .d-client-logo,
+      .d-investor-logo,
+      .d-investor-name,
+      .d-step-number {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="direction" id="direction-d" aria-labelledby="d-title">
+      <article class="concept concept-d">
+        <nav class="site-nav" aria-label="RWAI preview navigation">
+          <a class="wordmark" href="#direction-d" aria-label="RWAI home">
+            <img src="img1.svg" alt="RWAI" width="119" height="28" />
+          </a>
+          <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="mobile-nav-links" aria-expanded="false">
+            <span class="menu-toggle-lines" aria-hidden="true"><span></span></span>
+          </button>
+          <div class="nav-links" id="mobile-nav-links">
+            <span class="nav-link">Tokenized Goods</span>
+            <span class="nav-link">My Page</span>
+            <span class="nav-link active">Airdrop</span>
+            <span class="wallet-pill">0x71...39F2</span>
+          </div>
+        </nav>
+        <div class="d-stage">
+          <div class="d-light-waves" aria-hidden="true">
+            <span class="d-wave one"></span>
+            <span class="d-wave two"></span>
+            <span class="d-wave three"></span>
+          </div>
+          <div class="d-copy">
+            <p class="eyebrow">RWAI AIRDROP</p>
+            <h2 id="d-title">Apply daily.<br class="mobile-break"> Own what's next.</h2>
+            <p class="sub">Start your daily entry in seconds.</p>
+            <div class="btn-row">
+              <a class="btn primary js-scroll-to-purchase" href="#d-purchase">Buy Now</a>
+              <a class="btn secondary" href="#d-how-to">How it works</a>
+            </div>
+          </div>
+          <div class="d-visual">
+            <article class="airdrop-card catalog-card" id="d-card" aria-label="RWAI Airdrop catalog card">
+              <div class="catalog-thumb">
+                <img src="img2.webp" alt="RWAI symbol image" />
+              </div>
+              <div class="catalog-content">
+                <div class="catalog-title-row">
+                  <h3>RWAI Airdrop</h3>
+                  <span class="airdrop-badge">AIRDROP</span>
+                </div>
+                <div class="catalog-field">
+                  <span class="catalog-label">Entries</span>
+                  <strong class="catalog-field-value">0</strong>
+                </div>
+                <div class="catalog-field">
+                  <span class="catalog-label">Entry frequency</span>
+                  <strong class="quantity-pill">One entry per day per account</strong>
+                </div>
+
+              </div>
+            </article>
+          </div>
+        </div>
+        <section class="d-token-intro" aria-labelledby="d-token-title">
+          <h3 id="d-token-title">Meet the token behind this airdrop.</h3>
+          <div class="d-token-layout">
+            <div class="d-token-visual">
+              <img src="img2.webp" alt="RWAI symbol image" />
+            </div>
+            <dl class="d-token-details" aria-label="Token information">
+              <div class="d-token-row">
+                <dt>Token name</dt>
+                <dd>To be confirmed</dd>
+              </div>
+              <div class="d-token-row">
+                <dt>Symbol</dt>
+                <dd>To be confirmed</dd>
+              </div>
+              <div class="d-token-row">
+                <dt>Network</dt>
+                <dd>To be confirmed</dd>
+              </div>
+              <div class="d-token-row">
+                <dt>Token utility</dt>
+                <dd>To be confirmed</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+        <section class="d-clients" aria-labelledby="d-clients-title">
+          <h3 id="d-clients-title">Clients building with RWAI.</h3>
+          <div class="d-client-grid" aria-label="RWAI clients">
+            <div class="d-client-slot"><img class="d-client-logo hyundai" src="img4.png" alt="Hyundai Motor Company" /></div>
+            <div class="d-client-slot"><img class="d-client-logo audi" src="img5.png" alt="Audi" /></div>
+            <div class="d-client-slot"><img class="d-client-logo volvo" src="img6.png" alt="Volvo" /></div>
+            <div class="d-client-slot"><img class="d-client-logo hanwha" src="img7.png" alt="Hanwha Eagles" /></div>
+            <div class="d-client-slot"><img class="d-client-logo gc-biopharma" src="img8.jpg" alt="GC Biopharma" /></div>
+            <div class="d-client-slot"><img class="d-client-logo bgf" src="img9.jpg" alt="BGF" /></div>
+            <div class="d-client-slot"><img class="d-client-logo satur" src="img10.png" alt="SATUR" /></div>
+            <div class="d-client-slot"><img class="d-client-logo mischief" src="img11.png" alt="MISCHIEF" /></div>
+            <div class="d-client-slot"><img class="d-client-logo wooalong" src="img12.png" alt="Wooalong" /></div>
+            <div class="d-client-slot"><img class="d-client-logo borntowin" src="img13.png" alt="Born to Win" /></div>
+            <div class="d-client-slot"><img class="d-client-logo freiknock" src="img14.png" alt="Freiknock" /></div>
+            <div class="d-client-slot"><img class="d-client-logo filluminate" src="img15.png" alt="Filluminate" /></div>
+          </div>
+        </section>
+        <section class="d-investors" aria-labelledby="d-investors-title">
+          <h3 id="d-investors-title">Investors.</h3>
+          <div class="d-investor-marquee">
+            <div class="d-investor-grid" aria-label="RWAI investors">
+              <div class="d-investor-slot"><img class="d-investor-logo amber" src="img16.svg" alt="Amber" /></div>
+              <div class="d-investor-slot"><img class="d-investor-logo anti" src="img17.svg" alt="Anti Capital" /></div>
+              <div class="d-investor-slot"><img class="d-investor-logo arkstream" src="img18.svg" alt="ArkStream Capital" /></div>
+              <div class="d-investor-slot"><img class="d-investor-logo moonhill" src="img19.svg" alt="Moonhill Capital" /></div>
+              <div class="d-investor-slot"><span class="d-investor-name">WATERDRIP CAPITAL</span></div>
+              <div class="d-investor-slot"><img class="d-investor-logo uob" src="img20.svg" alt="UOB Venture Management" /></div>
+              <div class="d-investor-slot is-clone" aria-hidden="true"><img class="d-investor-logo amber" src="img16.svg" alt="" /></div>
+              <div class="d-investor-slot is-clone" aria-hidden="true"><img class="d-investor-logo anti" src="img17.svg" alt="" /></div>
+              <div class="d-investor-slot is-clone" aria-hidden="true"><img class="d-investor-logo arkstream" src="img18.svg" alt="" /></div>
+              <div class="d-investor-slot is-clone" aria-hidden="true"><img class="d-investor-logo moonhill" src="img19.svg" alt="" /></div>
+              <div class="d-investor-slot is-clone" aria-hidden="true"><span class="d-investor-name">WATERDRIP CAPITAL</span></div>
+              <div class="d-investor-slot is-clone" aria-hidden="true"><img class="d-investor-logo uob" src="img20.svg" alt="" /></div>
+            </div>
+          </div>
+        </section>
+        <section class="d-how-to" id="d-how-to" aria-labelledby="d-how-to-title">
+          <div class="d-how-to-header">
+            <h3 id="d-how-to-title">Join the airdrop in five steps.</h3>
+          </div>
+          <ol class="d-step-list" aria-label="Five steps to join the RWAI airdrop">
+            <li class="d-step">
+              <span class="d-step-number" aria-hidden="true">01</span>
+              <h4>Login</h4>
+              <p>Sign in to your RWAI account</p>
+            </li>
+            <li class="d-step">
+              <span class="d-step-number" aria-hidden="true">02</span>
+              <h4>Connect wallet</h4>
+              <p>Connect your wallet after login</p>
+            </li>
+            <li class="d-step">
+              <span class="d-step-number" aria-hidden="true">03</span>
+              <h4>Start entry</h4>
+              <p>Select Buy Now to continue</p>
+            </li>
+            <li class="d-step">
+              <span class="d-step-number" aria-hidden="true">04</span>
+              <h4>Select network</h4>
+              <p>Choose Base or BSC</p>
+            </li>
+            <li class="d-step">
+              <span class="d-step-number" aria-hidden="true">05</span>
+              <h4>Confirm entry</h4>
+              <p>Approve the gas transaction and review your entry in My Page</p>
+            </li>
+          </ol>
+          <div class="d-how-to-notes" aria-label="Airdrop participation notes">
+            <p class="d-how-to-note">There is no entry price. Each application only requires a small network gas fee.</p>
+            <p class="d-how-to-note">One entry per day per account.</p>
+            <p class="d-how-to-note">Diverse activity across the RWAI platform will also be considered for the airdrop. Explore and use it actively.</p>
+          </div>
+        </section>
+        <section class="d-faq" aria-labelledby="d-faq-title">
+          <div class="d-faq-layout">
+            <h3 id="d-faq-title">Airdrop Q&amp;A.</h3>
+            <div class="d-faq-list" aria-label="RWAI airdrop questions and answers">
+              <div class="d-faq-column">
+                <details class="d-faq-row">
+                  <summary>What does it cost to join, and are Sybil checks applied?</summary>
+                  <div class="d-faq-answer"><p>There is no entry price. Each application only requires a small network gas fee. Separate Sybil detection criteria do not apply because every entry requires payment of that gas fee.</p></div>
+                </details>
+                <details class="d-faq-row">
+                  <summary>How do I participate?</summary>
+                  <div class="d-faq-answer"><p>Log in to your RWAI account, connect your wallet, select Buy Now, choose Base or BSC, approve the transaction, and check the result in My Page.</p></div>
+                </details>
+                <details class="d-faq-row">
+                  <summary>How often can I apply?</summary>
+                  <div class="d-faq-answer"><p>One entry per day per account.</p></div>
+                </details>
+                <details class="d-faq-row">
+                  <summary>How are rewards allocated, and does platform activity matter?</summary>
+                  <div class="d-faq-answer"><p>Rewards scale proportionally with the number of participants. Diverse activity across the RWAI platform will also be considered for the airdrop.</p></div>
+                </details>
+              </div>
+              <div class="d-faq-column">
+                <details class="d-faq-row">
+                  <summary>Where can I check distributed assets?</summary>
+                  <div class="d-faq-answer"><p>Distributed assets will be added to your participant account and can be viewed on the RWAI platform.</p></div>
+                </details>
+                <details class="d-faq-row">
+                  <summary>When does the event end?</summary>
+                  <div class="d-faq-answer"><p>The event runs until further notice and may end early if the number of participating wallets becomes excessively high. When it ends, updates will be announced on the RWAI X account and this page.</p></div>
+                </details>
+                <details class="d-faq-row">
+                  <summary>What do entries represent?</summary>
+                  <div class="d-faq-answer"><p>Entries are participation records, not assets for ownership or trading.</p></div>
+                </details>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="d-purchase" id="d-purchase" aria-labelledby="d-purchase-title">
+          <div class="d-purchase-light-waves" aria-hidden="true">
+            <span class="d-purchase-wave one"></span>
+            <span class="d-purchase-wave two"></span>
+            <span class="d-purchase-wave three"></span>
+          </div>
+          <div class="d-purchase-layout">
+            <div class="d-purchase-copy">
+              <h3 id="d-purchase-title">Ready for your <br>next airdrop entry?</h3>
+              <p>Select Buy Now to continue with login and wallet connection.</p>
+            </div>
+            <article class="airdrop-card purchase-airdrop-card" aria-label="RWAI Airdrop entry card">
+              <div class="catalog-thumb">
+                <img src="img2.webp" alt="RWAI symbol image" />
+              </div>
+              <div class="catalog-content">
+                <div class="catalog-title-row">
+                  <h3>RWAI Airdrop</h3>
+                  <span class="airdrop-badge">AIRDROP</span>
+                </div>
+                <div class="catalog-field">
+                  <span class="catalog-label">Entries</span>
+                  <strong class="catalog-field-value">0</strong>
+                </div>
+                <div class="catalog-field">
+                  <span class="catalog-label">Entry frequency</span>
+                  <strong class="quantity-pill">One entry per day per account</strong>
+                </div>
+                <div class="catalog-actions">
+                  <button class="catalog-action primary entry-cta js-open-purchase-modal" type="button" aria-label="Buy Now"><span>Buy Now</span></button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </article>
+    </section>
+  </main>
+
+  <section class="login-route" id="login-route" aria-labelledby="login-route-title" hidden>
+    <nav class="login-route-nav" aria-label="RWAI login navigation">
+      <span class="wordmark">
+        <img src="img1.svg" alt="RWAI" width="119" height="28" />
+      </span>
+      <button class="login-route-back js-return-to-airdrop" type="button">Back to airdrop</button>
+    </nav>
+    <div class="login-route-main">
+      <div class="login-route-copy">
+        <p class="eyebrow">RWAI ACCOUNT</p>
+        <h1 id="login-route-title" tabindex="-1">Sign in to continue.</h1>
+        <p>Login is required before you can connect a wallet and submit an airdrop entry.</p>
+      </div>
+      <div class="login-route-panel" aria-label="Login transition preview">
+        <h2>Continue on rwai.delivery</h2>
+        <p>This static preview simulates the required login screen. Continue after login to review the entry transaction.</p>
+        <button class="login-route-continue js-complete-login" type="button">Continue after login</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="purchase-modal-layer" id="purchase-modal" hidden>
+    <div class="purchase-modal-backdrop" aria-hidden="true"></div>
+
+    <section class="purchase-modal-shell purchase-review-view" id="purchase-review-view" role="dialog" aria-modal="true" aria-labelledby="purchase-modal-title" aria-describedby="purchase-modal-description" tabindex="-1">
+      <header class="purchase-modal-header">
+        <div class="purchase-modal-brand">
+          <div class="purchase-modal-visual" aria-hidden="true">
+            <img src="img2.webp" alt="" />
+          </div>
+          <div class="purchase-modal-heading">
+            <span class="purchase-modal-kicker">RWAI AIRDROP ENTRY</span>
+            <h2 class="purchase-modal-title" id="purchase-modal-title">Review entry transaction</h2>
+          </div>
+        </div>
+        <button class="purchase-modal-close js-close-purchase-modal" type="button" aria-label="Close entry review">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+          </svg>
+        </button>
+      </header>
+      <div class="purchase-modal-body">
+        <p class="purchase-modal-description" id="purchase-modal-description">Review the network transaction required to submit your airdrop entry.</p>
+        <div class="purchase-modal-product">
+          <span class="purchase-modal-label">Product</span>
+          <strong>RWAI Airdrop</strong>
+        </div>
+        <div class="network-selector">
+          <span class="network-selector-label" id="network-selector-label">Network</span>
+          <div class="network-tabs" role="tablist" aria-labelledby="network-selector-label">
+            <button class="network-tab" id="network-base-tab" type="button" role="tab" aria-selected="true" aria-controls="network-summary" tabindex="0" data-network="Base" data-asset="ETH" data-fee="0.0002 ETH">Base</button>
+            <button class="network-tab" id="network-bsc-tab" type="button" role="tab" aria-selected="false" aria-controls="network-summary" tabindex="-1" data-network="BSC" data-asset="BNB" data-fee="0.0006 BNB">BSC</button>
+          </div>
+        </div>
+        <dl class="purchase-review-list" id="network-summary" role="tabpanel" aria-labelledby="network-base-tab">
+          <div class="purchase-review-row">
+            <dt>Gas asset</dt>
+            <dd id="payment-asset">ETH</dd>
+          </div>
+          <div class="purchase-review-row">
+            <dt>Network fee (gas)</dt>
+            <dd id="network-fee">0.0002 ETH</dd>
+          </div>
+          <div class="purchase-review-row">
+            <dt>Entries</dt>
+            <dd class="entry-value">+1 after confirmation</dd>
+          </div>
+        </dl>
+        <div class="purchase-status" aria-label="Transaction status">
+          <p class="purchase-status-title">Transaction status</p>
+          <div class="purchase-status-row">
+            <span>Wallet approval</span>
+            <span class="purchase-status-value">Awaiting approval</span>
+          </div>
+          <div class="purchase-status-row">
+            <span>Network confirmation</span>
+            <span class="purchase-status-value">Not started</span>
+          </div>
+        </div>
+        <p class="purchase-modal-notice">Signing submits one on-chain entry transaction. The entry is recorded after network confirmation. One entry per day per account.</p>
+      </div>
+      <footer class="purchase-modal-footer">
+        <button class="purchase-modal-button secondary js-close-purchase-modal" type="button">Cancel</button>
+        <button class="purchase-modal-button primary js-confirm-purchase" type="button">Confirm in wallet</button>
+      </footer>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var siteNav = document.querySelector(".site-nav");
+      var menuToggle = document.querySelector(".menu-toggle");
+
+      function closeMenu() {
+        siteNav.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+      }
+
+      menuToggle.addEventListener("click", function () {
+        var isOpen = siteNav.classList.toggle("menu-open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!siteNav.contains(event.target)) closeMenu();
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeMenu();
+          menuToggle.focus();
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 820) closeMenu();
+      });
+
+      var pageMain = document.querySelector("main");
+      var loginRoute = document.getElementById("login-route");
+      var loginRouteTitle = document.getElementById("login-route-title");
+      var returnToAirdrop = document.querySelector(".js-return-to-airdrop");
+      var completeLogin = document.querySelector(".js-complete-login");
+      var purchaseModal = document.getElementById("purchase-modal");
+      var purchaseModalBackdrop = purchaseModal.querySelector(".purchase-modal-backdrop");
+      var purchaseReviewView = document.getElementById("purchase-review-view");
+      var modalCloseButtons = purchaseModal.querySelectorAll(".js-close-purchase-modal");
+      var purchaseScrollTrigger = document.querySelector(".js-scroll-to-purchase");
+      var purchaseSection = document.getElementById("d-purchase");
+      var purchaseModalTriggers = document.querySelectorAll(".js-open-purchase-modal");
+      var networkTabs = purchaseModal.querySelectorAll(".network-tab");
+      var networkSummary = document.getElementById("network-summary");
+      var paymentAsset = document.getElementById("payment-asset");
+      var networkFee = document.getElementById("network-fee");
+      var purchaseConfirm = purchaseModal.querySelector(".js-confirm-purchase");
+      var purchaseEntryCta = document.querySelector(".purchase-airdrop-card .entry-cta");
+      var lastModalTrigger = null;
+      var previousScrollY = 0;
+
+      function showLoginRoute(trigger) {
+        lastModalTrigger = trigger;
+        previousScrollY = window.scrollY;
+        closeMenu();
+        pageMain.hidden = true;
+        loginRoute.hidden = false;
+        window.scrollTo(0, 0);
+        loginRouteTitle.focus();
+      }
+
+      function returnFromLogin() {
+        loginRoute.hidden = true;
+        pageMain.hidden = false;
+        window.scrollTo(0, previousScrollY);
+        if (lastModalTrigger) lastModalTrigger.focus();
+      }
+
+      function openPurchaseModal() {
+        loginRoute.hidden = true;
+        pageMain.hidden = false;
+        window.scrollTo(0, previousScrollY);
+        purchaseModal.hidden = false;
+        document.body.classList.add("purchase-modal-open");
+        pageMain.setAttribute("inert", "");
+        purchaseReviewView.focus();
+      }
+
+      function closePurchaseModal() {
+        if (purchaseModal.hidden) return;
+        purchaseModal.hidden = true;
+        document.body.classList.remove("purchase-modal-open");
+        pageMain.removeAttribute("inert");
+        if (lastModalTrigger) lastModalTrigger.focus();
+      }
+
+      purchaseScrollTrigger.addEventListener("click", function (event) {
+        event.preventDefault();
+        closeMenu();
+        purchaseSection.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "start"
+        });
+      });
+
+      purchaseModalTriggers.forEach(function (trigger) {
+        trigger.addEventListener("click", function (event) {
+          event.preventDefault();
+          showLoginRoute(trigger);
+        });
+      });
+
+      returnToAirdrop.addEventListener("click", returnFromLogin);
+      completeLogin.addEventListener("click", openPurchaseModal);
+
+      purchaseConfirm.addEventListener("click", function () {
+        purchaseEntryCta.disabled = true;
+        purchaseEntryCta.setAttribute("aria-label", "Already applied today.");
+        purchaseEntryCta.querySelector("span").textContent = "Already applied today.";
+        closePurchaseModal();
+      });
+
+      modalCloseButtons.forEach(function (button) {
+        button.addEventListener("click", closePurchaseModal);
+      });
+      purchaseModalBackdrop.addEventListener("click", closePurchaseModal);
+
+      document.addEventListener("keydown", function (event) {
+        if (purchaseModal.hidden) return;
+
+        if (event.key === "Escape") {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          closePurchaseModal();
+          return;
+        }
+
+        if (event.key !== "Tab") return;
+        var focusable = Array.prototype.filter.call(
+          purchaseReviewView.querySelectorAll("button:not([disabled]), [href], [tabindex]:not([tabindex='-1'])"),
+          function (item) { return item.offsetParent !== null; }
+        );
+        if (!focusable.length) {
+          event.preventDefault();
+          purchaseReviewView.focus();
+          return;
+        }
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (document.activeElement === purchaseReviewView) {
+          event.preventDefault();
+          (event.shiftKey ? last : first).focus();
+        } else if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }, true);
+
+      function selectNetwork(tab) {
+        networkTabs.forEach(function (item) {
+          var selected = item === tab;
+          item.setAttribute("aria-selected", String(selected));
+          item.setAttribute("tabindex", selected ? "0" : "-1");
+        });
+        paymentAsset.textContent = tab.getAttribute("data-asset");
+        networkFee.textContent = tab.getAttribute("data-fee");
+        networkSummary.setAttribute("aria-labelledby", tab.id);
+      }
+
+      networkTabs.forEach(function (tab, index) {
+        tab.addEventListener("click", function () {
+          selectNetwork(tab);
+        });
+        tab.addEventListener("keydown", function (event) {
+          if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+          event.preventDefault();
+          var direction = event.key === "ArrowRight" ? 1 : -1;
+          var nextIndex = (index + direction + networkTabs.length) % networkTabs.length;
+          selectNetwork(networkTabs[nextIndex]);
+          networkTabs[nextIndex].focus();
+        });
+      });
+
+      var groups = [
+        { selector: ".d-copy > *", step: 80 },
+        { selector: ".d-visual", step: 0 },
+        { selector: ".d-token-intro > h3", step: 0 },
+        { selector: ".d-token-visual, .d-token-row", step: 65 },
+        { selector: ".d-clients > h3", step: 0 },
+        { selector: ".d-client-slot", step: 55 },
+        { selector: ".d-investors > h3", step: 0 },
+        { selector: ".d-investor-slot", step: 55 },
+        { selector: ".d-how-to-header > *", step: 90 },
+        { selector: ".d-step", step: 65 },
+        { selector: ".d-how-to-note", step: 80 },
+        { selector: ".d-faq h3", step: 0 },
+        { selector: ".d-faq-row", step: 55 },
+        { selector: ".d-purchase-copy > *", step: 90 },
+        { selector: ".purchase-airdrop-card", step: 0 }
+      ];
+
+      document.documentElement.classList.add("motion-ready");
+
+      var items = [];
+      groups.forEach(function (group) {
+        var nodes = document.querySelectorAll(group.selector);
+        nodes.forEach(function (node, index) {
+          node.classList.add("reveal");
+          node.style.setProperty("--reveal-delay", String(index * group.step) + "ms");
+          items.push(node);
+        });
+      });
+
+      if (!("IntersectionObserver" in window)) {
+        items.forEach(function (item) { item.classList.add("is-visible"); });
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -8% 0px"
+      });
+
+      items.forEach(function (item) { observer.observe(item); });
+    }());
+  </script>
+</body>
+</html>
